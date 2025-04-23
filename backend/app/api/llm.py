@@ -45,10 +45,8 @@ async def generate_image(request: ImageGenerationRequest) -> ImageGenerationResp
 async def generate_story_with_images(request: StoryGenerationRequest) -> StoryGenerationResponse:
     """生成故事和配图"""
     try:
-        segments = llm_service.generate_story_with_images(
-            segments=request.segments,
-            story_prompt=request.story_prompt,
-            language=request.language
+        segments = await llm_service.generate_story_with_images(
+            request=request
         )
         return StoryGenerationResponse(segments=segments)
     except Exception as e:
